@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { cardService } from '../../services/cardService';
 import { Link } from 'react-router-dom';
-import { FiEdit, FiTrash2, FiEye, FiCopy, FiExternalLink, FiShare2, FiZap, FiPlus } from 'react-icons/fi';
+import { FiEdit, FiTrash2, FiEye, FiCopy, FiExternalLink, FiZap, FiPlus } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 
 const MyPremiumCards = () => {
@@ -14,7 +14,7 @@ const MyPremiumCards = () => {
         if (userData?.uid) {
             loadCards();
         }
-    }, [userData]);
+    }, [userData]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     const loadCards = async () => {
         try {

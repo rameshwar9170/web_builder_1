@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { cardService } from '../../services/cardService';
 import { toast } from 'react-toastify';
-import { FiEye, FiZap, FiExternalLink, FiShare2, FiHome, FiArrowLeft, FiGlobe, FiBriefcase, FiZap as FiZapIcon } from 'react-icons/fi';
+import { FiEye, FiZap, FiExternalLink, FiHome, FiArrowLeft, FiGlobe, FiBriefcase } from 'react-icons/fi';
 import PremiumWebEditor from '../../components/editors/PremiumWebEditor';
 import BasicInfoEditor from '../../components/editors/BasicInfoEditor';
 import ContactEditor from '../../components/editors/ContactEditor';
@@ -18,7 +18,7 @@ const EditPremiumCard = () => {
 
     useEffect(() => {
         loadCard();
-    }, [cardId]);
+    }, [cardId]); // eslint-disable-next-line react-hooks/exhaustive-deps
 
     const loadCard = async () => {
         try {

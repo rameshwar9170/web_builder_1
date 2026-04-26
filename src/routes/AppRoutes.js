@@ -22,7 +22,6 @@ import AdminDashboard from '../pages/admin/Dashboard';
 import MyCards from '../pages/admin/MyCards';
 import CreateCard from '../pages/admin/CreateCard';
 import CreatePremiumCard from '../pages/admin/CreatePremiumCard';
-import CreateSelection from '../pages/admin/CreateSelection';
 import EditCard from '../pages/admin/EditCard';
 import EditPremiumCard from '../pages/admin/EditPremiumCard';
 import MyPremiumCards from '../pages/admin/MyPremiumCards';

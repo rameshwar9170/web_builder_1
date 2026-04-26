@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { premiumService } from '../../services/premiumService';
-import { FiMail, FiPhone, FiMapPin, FiInstagram, FiLinkedin, FiTwitter, FiGlobe, FiCheck, FiArrowRight, FiStar } from 'react-icons/fi';
+import { FiInstagram, FiLinkedin, FiTwitter, FiGlobe, FiCheck, FiArrowRight, FiStar } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
 // --- PREMIUM ELITE FRONTEND ---
 const EliteHomeLayout = ({ card }) => {
-    const { basicInfo, about, contact, premiumWeb, theme } = card;
+    const { basicInfo, contact, premiumWeb } = card;
     const web = premiumWeb || {};
 
     return (

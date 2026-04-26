@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { cardService } from '../../services/cardService';
 import { premiumService } from '../../services/premiumService';
 import { toast } from 'react-toastify';
-import { FiCheck, FiX, FiLoader, FiArrowRight, FiStar, FiZap, FiLayout, FiImage, FiSettings, FiBriefcase, FiUsers, FiMail, FiMapPin, FiGlobe, FiTarget, FiMessageSquare, FiLink } from 'react-icons/fi';
+import { FiCheck, FiX, FiLoader, FiArrowRight, FiStar, FiZap, FiSettings } from 'react-icons/fi';
 
 const CreatePremiumCard = () => {
     const { userData } = useSelector((state) => state.auth);
@@ -23,7 +23,7 @@ const CreatePremiumCard = () => {
         phone: ''
     });
 
-    const [premiumWeb, setPremiumWeb] = useState({
+    const [premiumWeb] = useState({
         navbar: { subtitle: 'Gold Standard' },
         hero: { heading: '', image: '', badge: 'Elite Experience' },
         stats: [

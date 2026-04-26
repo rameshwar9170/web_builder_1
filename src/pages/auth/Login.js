@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../store/slices/authSlice';
 import { toast } from 'react-toastify';
 import { ROLES } from '../../firebase/collections';
@@ -11,6 +11,21 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isAuthenticated, userData } = useSelector((state) => state.auth);
+
+  // Redirect if already logged in
+  React.useEffect(() => {
+    if (isAuthenticated && userData) {
+      const role = userData.role?.toLowerCase();
+      if (role === ROLES.SUPER_ADMIN) {
+        navigate('/super-admin');
+      } else if (role === ROLES.ADMIN) {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
+    }
+  }, [isAuthenticated, userData, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +37,10 @@ const Login = () => {
       toast.success('Login successful!');
 
       // Redirect based on role
-      if (result.userData.role === ROLES.SUPER_ADMIN) {
+      const role = result.userData?.role?.toLowerCase();
+      if (role === ROLES.SUPER_ADMIN) {
         navigate('/super-admin');
-      } else if (result.userData.role === ROLES.ADMIN) {
+      } else if (role === ROLES.ADMIN) {
         navigate('/admin');
       } else {
         navigate('/');

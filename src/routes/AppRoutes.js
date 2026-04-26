@@ -42,7 +42,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     return <Navigate to="/login" replace />;
   }
 
-  if (allowedRoles && !allowedRoles.includes(userData?.role)) {
+  if (allowedRoles && !allowedRoles.map(r => r.toLowerCase()).includes(userData?.role?.toLowerCase())) {
     return <Navigate to="/unauthorized" replace />;
   }
 
@@ -50,6 +50,8 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 };
 
 const AppRoutes = () => {
+  const { isAuthenticated, userData } = useSelector((state) => state.auth);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -77,7 +79,7 @@ const AppRoutes = () => {
         <Route
           path="/admin/*"
           element={
-            <ProtectedRoute allowedRoles={[ROLES.ADMIN]}>
+            <ProtectedRoute allowedRoles={[ROLES.ADMIN, ROLES.USER]}>
               <AdminLayout />
             </ProtectedRoute>
           }
@@ -94,7 +96,17 @@ const AppRoutes = () => {
 
         {/* Public Routes */}
         <Route path="/" element={<PublicLayout />}>
-          <Route index element={<Navigate to="/login" replace />} />
+          <Route index element={
+            isAuthenticated ? (
+              userData?.role?.toLowerCase() === ROLES.SUPER_ADMIN ? (
+                <Navigate to="/super-admin" replace />
+              ) : (
+                <Navigate to="/admin" replace />
+              )
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } />
           <Route path="card/:slug" element={<ViewCard />} />
           <Route path="premium-card/:slug" element={<PremiumViewCard />} />
         </Route>

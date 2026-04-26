@@ -76,7 +76,7 @@ const EditPremiumCard = () => {
         { id: 'identity', label: 'Identity Node', icon: <FiHome /> },
         { id: 'connectivity', label: 'Connectivity', icon: <FiGlobe /> },
         { id: 'portfolio', label: 'Global Portfolio', icon: <FiBriefcase /> },
-        { id: 'aesthetics', label: 'Base Theme', icon: <FiZapIcon /> }
+        { id: 'aesthetics', label: 'Base Theme', icon: <FiZap /> }
     ];
 
     return (

@@ -1,0 +1,29 @@
+========================================
+VERCEL ENVIRONMENT VARIABLES
+========================================
+
+Copy and paste these into Vercel:
+Project Settings → Environment Variables
+
+========================================
+
+REACT_APP_FIREBASE_API_KEY=AIzaSyDSA9eYdtVzF-8OhVQ0kK2kP8oZLSOMNFs
+
+REACT_APP_FIREBASE_AUTH_DOMAIN=digital-cards-38a1d.firebaseapp.com
+
+REACT_APP_FIREBASE_PROJECT_ID=digital-cards-38a1d
+
+REACT_APP_FIREBASE_STORAGE_BUCKET=digital-cards-38a1d.firebasestorage.app
+
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=73437948325
+
+REACT_APP_FIREBASE_APP_ID=1:73437948325:web:3c928b689022beeea8604c
+
+========================================
+
+IMPORTANT:
+- Select ALL environments (Production, Preview, Development)
+- Click "Save" after adding each variable
+- Redeploy after adding all variables
+
+========================================

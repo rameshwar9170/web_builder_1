@@ -10,12 +10,8 @@ const MyCards = () => {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadCards();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
-  const loadCards = async () => {
+  const loadCards = React.useCallback(async () => {
+    if (!user?.uid) return;
     try {
       const data = await cardService.getAdminCards(user.uid);
       setCards(data);
@@ -24,7 +20,11 @@ const MyCards = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user?.uid]);
+
+  useEffect(() => {
+    loadCards();
+  }, [loadCards]);
 
   const handleDelete = async (cardId) => {
     if (window.confirm('Are you sure you want to delete this card?')) {

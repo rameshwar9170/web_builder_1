@@ -10,13 +10,8 @@ const MyPremiumCards = () => {
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        if (userData?.uid) {
-            loadCards();
-        }
-    }, [userData]); // eslint-disable-next-line react-hooks/exhaustive-deps
-
-    const loadCards = async () => {
+    const loadCards = React.useCallback(async () => {
+        if (!userData?.uid) return;
         try {
             const allCards = await cardService.getAdminCards(userData.uid);
             // Filter only premium ones
@@ -27,7 +22,13 @@ const MyPremiumCards = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [userData?.uid]);
+
+    useEffect(() => {
+        if (userData?.uid) {
+            loadCards();
+        }
+    }, [userData?.uid, loadCards]);
 
     const handleDelete = async (cardId) => {
         if (window.confirm('Are you sure you want to decommission this elite experience?')) {

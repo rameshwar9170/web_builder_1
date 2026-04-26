@@ -13,12 +13,8 @@ const AdminDashboard = () => {
     totalViews: 0
   });
 
-  useEffect(() => {
-    loadStats();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
-  const loadStats = async () => {
+  const loadStats = React.useCallback(async () => {
+    if (!user?.uid) return;
     try {
       const cards = await cardService.getAdminCards(user.uid);
       const totalViews = cards.reduce((sum, card) => sum + (card.analytics?.views || 0), 0);
@@ -32,7 +28,11 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error('Error loading stats:', error);
     }
-  };
+  }, [user?.uid]);
+
+  useEffect(() => {
+    loadStats();
+  }, [loadStats]);
 
   return (
     <div>

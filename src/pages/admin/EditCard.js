@@ -38,12 +38,7 @@ const EditCard = () => {
   }, [card, activeTab]);
   const [showFeatureManager, setShowFeatureManager] = useState(false);
 
-  useEffect(() => {
-    loadCard();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cardId]);
-
-  const loadCard = async () => {
+  const loadCard = React.useCallback(async () => {
     try {
       const data = await cardService.getCard(cardId);
       setCard(data);
@@ -52,7 +47,11 @@ const EditCard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [cardId]);
+
+  useEffect(() => {
+    loadCard();
+  }, [loadCard]);
 
   const handleSave = async (section, data) => {
     console.log('EditCard handleSave called:', { section, data });

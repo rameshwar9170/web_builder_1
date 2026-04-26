@@ -16,11 +16,7 @@ const EditPremiumCard = () => {
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('design');
 
-    useEffect(() => {
-        loadCard();
-    }, [cardId]); // eslint-disable-next-line react-hooks/exhaustive-deps
-
-    const loadCard = async () => {
+    const loadCard = React.useCallback(async () => {
         try {
             const data = await cardService.getCard(cardId);
             if (!data.isPremium) {
@@ -35,7 +31,11 @@ const EditPremiumCard = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [cardId, navigate]);
+
+    useEffect(() => {
+        loadCard();
+    }, [loadCard]);
 
     const handleSave = async (section, data) => {
         try {

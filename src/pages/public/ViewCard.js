@@ -38,12 +38,7 @@ const ViewCard = () => {
   });
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    loadCard();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slug]);
-
-  const loadCard = async () => {
+  const loadCard = React.useCallback(async () => {
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const isPreview = urlParams.get('preview') === 'true';
@@ -72,7 +67,11 @@ const ViewCard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [slug]);
+
+  useEffect(() => {
+    loadCard();
+  }, [loadCard]);
 
   // Cart functions for online ordering
   const addToCart = (product) => {
